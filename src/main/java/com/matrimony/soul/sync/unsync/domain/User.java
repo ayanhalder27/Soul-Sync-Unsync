@@ -6,17 +6,17 @@ public class User {
     private String username;
     private String email;
     private String contact;
-    private Enum<Gender> gender;
+    private Gender gender;
     private String password_hash;
-    private Enum<Role> role;
-    private Enum<Religion> religion;
-    private Enum<SoulStatus> soulStatus;
+    private Role role;
+    private Religion religion;
+    private SoulStatus soulStatus;
     private String profile_pic;
     private boolean visibility;
 
     public User(){}
 
-    public User(int id, String name, String username, String email, String contact, Enum<Gender> gender, String password_hash, Enum<Role> role, Enum<Religion> religion, Enum<SoulStatus> soulStatus, String profile_pic, boolean visibility) {
+    public User(int id, String name, String username, String email, String contact, Gender gender, String password_hash, Role role, Religion religion, SoulStatus soulStatus, String profile_pic, boolean visibility) {
         this.id = id;
         this.name = name;
         this.username = username;
@@ -75,7 +75,7 @@ public class User {
         return gender;
     }
 
-    public void setGender(Enum<Gender> gender) {
+    public void setGender(Gender gender) {
         this.gender = gender;
     }
 
@@ -91,7 +91,7 @@ public class User {
         return role;
     }
 
-    public void setRole(Enum<Role> role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 
@@ -99,7 +99,7 @@ public class User {
         return religion;
     }
 
-    public void setReligion(Enum<Religion> religion) {
+    public void setReligion(Religion religion) {
         this.religion = religion;
     }
 
@@ -107,7 +107,7 @@ public class User {
         return soulStatus;
     }
 
-    public void setSoulStatus(Enum<SoulStatus> soulStatus) {
+    public void setSoulStatus(SoulStatus soulStatus) {
         this.soulStatus = soulStatus;
     }
 
@@ -119,7 +119,7 @@ public class User {
         this.profile_pic = profile_pic;
     }
 
-    public boolean isVisibility() {
+    public boolean getVisibility() {
         return visibility;
     }
 

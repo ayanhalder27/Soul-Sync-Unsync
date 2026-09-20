@@ -19,7 +19,7 @@ public class UserMapper implements RowMapper<User> {
                 rs.getString("password_hash"),
                 Role.valueOf(rs.getString("role")),
                 Religion.valueOf(rs.getString("religion")),
-                SoulStatus.valueOf(rs.getString("soul-status")),
+                SoulStatus.valueOf(rs.getString("soul_status")),
                 rs.getString("profile_pic"),
                 rs.getBoolean("visibility")
 
