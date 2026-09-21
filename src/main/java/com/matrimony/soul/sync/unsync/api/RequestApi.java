@@ -34,7 +34,13 @@ public class RequestApi {
     }
 
     @GetMapping("/{receiver_id}")
-    public List<RequestListDTO> getRequestList(@PathVariable int receiver_id){
-        return requestService.getRequestList(receiver_id);
+    public ResponseEntity<List<RequestListDTO>> getRequestList(@PathVariable int receiver_id){
+        return ResponseEntity.ok(requestService.getRequestList(receiver_id));
+    }
+
+    @PutMapping("/{request_id}")
+    public ResponseEntity<Void> acceptRequest(@PathVariable int request_id){
+        requestService.acceptRequest(request_id);
+        return ResponseEntity.status(HttpStatus.PARTIAL_CONTENT).build();
     }
 }

@@ -1,5 +1,6 @@
 package com.matrimony.soul.sync.unsync.service;
 
+import com.matrimony.soul.sync.unsync.domain.Partner;
 import com.matrimony.soul.sync.unsync.domain.Request;
 import com.matrimony.soul.sync.unsync.dto.RequestListDTO;
 import com.matrimony.soul.sync.unsync.repository.RequestRepository;
@@ -11,9 +12,11 @@ import java.util.List;
 @Service
 public class RequestService {
     RequestRepository requestRepository;
+    PartnerService partnerService;
 
-    public RequestService(RequestRepository requestRepository) {
+    public RequestService(RequestRepository requestRepository, PartnerService partnerService) {
         this.requestRepository = requestRepository;
+        this.partnerService = partnerService;
     }
 
     public int sendRequest(Request request){
@@ -26,5 +29,15 @@ public class RequestService {
 
     public List<RequestListDTO> getRequestList(int receiver_id){
         return requestRepository.getRequestList(receiver_id);
+    }
+
+    public void acceptRequest(int request_id){
+        Request request = requestRepository.getRequestData(request_id);
+        Partner partner = new Partner();
+        partner.setUser1_id(request.getReceiver_id());
+        partner.setUser2_id(request.getSender_id());
+        if(partnerService.addPartner(partner)){
+            deleteRequest(request_id);
+        }
     }
 }

@@ -3,6 +3,7 @@ package com.matrimony.soul.sync.unsync.dto;
 import java.time.LocalDateTime;
 
 public class RequestListDTO {
+    private int id;
     private String profile_pic;
     private String name;
     private LocalDateTime sent_at;
@@ -10,11 +11,20 @@ public class RequestListDTO {
 
     public RequestListDTO(){}
 
-    public RequestListDTO(String profile_pic, String name, LocalDateTime sent_at, int sender_id) {
+    public RequestListDTO(int id, String profile_pic, String name, LocalDateTime sent_at, int sender_id) {
+        this.id = id;
         this.profile_pic = profile_pic;
         this.name = name;
         this.sent_at = sent_at;
         this.sender_id = sender_id;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getProfile_pic() {
@@ -52,7 +62,8 @@ public class RequestListDTO {
     @Override
     public String toString() {
         return "RequestListDTO{" +
-                "profile_pic='" + profile_pic + '\'' +
+                "id=" + id +
+                ", profile_pic='" + profile_pic + '\'' +
                 ", name='" + name + '\'' +
                 ", sent_at=" + sent_at +
                 ", sender_id=" + sender_id +
