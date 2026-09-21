@@ -1,6 +1,7 @@
 package com.matrimony.soul.sync.unsync.api;
 
 import com.matrimony.soul.sync.unsync.domain.Chat;
+import com.matrimony.soul.sync.unsync.dto.ChatListDTO;
 import com.matrimony.soul.sync.unsync.service.ChatService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -42,5 +43,10 @@ public class ChatApi {
     public ResponseEntity<Void> editMessage(@PathVariable int message_id, @RequestParam int sender_id, @RequestBody String message) {
         chatService.editMessage(message_id, sender_id, message);
         return ResponseEntity.status(HttpStatus.PARTIAL_CONTENT).build();
+    }
+
+    @GetMapping("/list")
+    public ResponseEntity<List<ChatListDTO>> getChatList(@RequestParam int sender_id){
+        return ResponseEntity.ok(chatService.getChatList(sender_id));
     }
 }

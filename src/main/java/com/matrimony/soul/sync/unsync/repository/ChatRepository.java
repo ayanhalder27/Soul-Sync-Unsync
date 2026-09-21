@@ -1,10 +1,12 @@
 package com.matrimony.soul.sync.unsync.repository;
 
 import com.matrimony.soul.sync.unsync.domain.Chat;
+import com.matrimony.soul.sync.unsync.dto.ChatListDTO;
 import com.matrimony.soul.sync.unsync.repository.mapper.ChatMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
@@ -40,5 +42,11 @@ public class ChatRepository {
                 message,
                 message_id,
                 sender_id);
+    }
+
+    public List<ChatListDTO> getChatList(int sender_id){
+        return jdbcTemplate.query("SELECT Users.profile_pic, Users.name, message, sent_at, receiver_id FROM ( SELECT receiver_id, message, sent_at, ROW_NUMBER() OVER (PARTITION BY receiver_id ORDER BY sent_at DESC) AS rn FROM Chats WHERE sender_id = ?) c inner join Users on c.receiver_id = Users.id WHERE rn = 1;", ((rs, rowNum) -> {
+            return new ChatListDTO(rs.getString("profile_pic"), rs.getString("name"), rs.getString("message"), rs.getObject("sent_at", LocalDateTime.class), rs.getInt("receiver_id"));
+        }), sender_id);
     }
 }
