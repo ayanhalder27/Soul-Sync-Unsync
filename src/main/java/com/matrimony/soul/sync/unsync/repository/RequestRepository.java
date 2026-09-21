@@ -1,9 +1,11 @@
 package com.matrimony.soul.sync.unsync.repository;
 
 import com.matrimony.soul.sync.unsync.domain.Request;
+import com.matrimony.soul.sync.unsync.dto.RequestListDTO;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Repository
@@ -22,5 +24,15 @@ public class RequestRepository {
 
     public int deleteRequest(int request_id){
         return jdbcTemplate.update("DELETE FROM Requests WHERE id = ?", request_id);
+    }
+
+    public List<RequestListDTO> getRequestList(int receiver_id){
+        return jdbcTemplate.query("SELECT profile_pic, name, sent_at, sender_id FROM defaultdb.Requests inner join Users on sender_id = Users.id where receiver_id = ?",
+                (rs, rowNum) -> {
+                    return new RequestListDTO(rs.getString("profile_pic"),
+                            rs.getString("name"),
+                            rs.getObject("sent_at", LocalDateTime.class),
+                            rs.getInt("sender_id"));
+                }, receiver_id);
     }
 }

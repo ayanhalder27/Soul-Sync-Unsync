@@ -1,10 +1,13 @@
 package com.matrimony.soul.sync.unsync.api;
 
 import com.matrimony.soul.sync.unsync.domain.Request;
+import com.matrimony.soul.sync.unsync.dto.RequestListDTO;
 import com.matrimony.soul.sync.unsync.service.RequestService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("api/requests")
@@ -28,5 +31,10 @@ public class RequestApi {
     public ResponseEntity<Void> deleteRequest(@PathVariable int request_id){
         requestService.deleteRequest(request_id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping("/{receiver_id}")
+    public List<RequestListDTO> getRequestList(@PathVariable int receiver_id){
+        return requestService.getRequestList(receiver_id);
     }
 }

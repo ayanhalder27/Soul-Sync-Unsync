@@ -10,4 +10,6 @@ public class PartnerRepository {
     public PartnerRepository(JdbcTemplate jdbcTemplate) {
         this.jdbcTemplate = jdbcTemplate;
     }
+
+
 }
