@@ -1,15 +1,17 @@
 package com.matrimony.soul.sync.unsync.domain;
 
-public class Service {
+import java.math.BigDecimal;
+
+public class Services {
     private int id;
     private String service_name;
     private String description;
     private float price;
     private int organizer_id;
 
-    public Service(){}
+    public Services(){}
 
-    public Service(int id, String service_name, String description, float price, int organizer_id) {
+    public Services(int id, String service_name, String description, float price, int organizer_id) {
         this.id = id;
         this.service_name = service_name;
         this.description = description;

@@ -1,16 +1,16 @@
 package com.matrimony.soul.sync.unsync.repository.mapper;
 
-import com.matrimony.soul.sync.unsync.domain.Service;
+import com.matrimony.soul.sync.unsync.domain.Services;
 import org.springframework.jdbc.core.RowMapper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-public class ServiceMapper implements RowMapper<Service> {
+public class ServicesMapper implements RowMapper<Services> {
 
     @Override
-    public Service mapRow(ResultSet rs, int rowNUm) throws SQLException{
-        return new Service(
+    public Services mapRow(ResultSet rs, int rowNUm) throws SQLException{
+        return new Services(
                 rs.getInt("id"),
                 rs.getString("service_name"),
                 rs.getString("description"),
