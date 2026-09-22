@@ -49,4 +49,5 @@ public class ChatApi {
     public ResponseEntity<List<ChatListDTO>> getChatList(@RequestParam int sender_id){
         return ResponseEntity.ok(chatService.getChatList(sender_id));
     }
+
 }
