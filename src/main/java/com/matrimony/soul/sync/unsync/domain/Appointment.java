@@ -2,16 +2,16 @@ package com.matrimony.soul.sync.unsync.domain;
 
 import java.time.LocalDateTime;
 
-public class Appointments {
+public class Appointment {
     private int id;
     private int client_id;
     private int lawyer_id;
-    private Enum<AppointmentStatus> status;
+    private AppointmentStatus status;
     private LocalDateTime appointment_time;
 
-    public Appointments(){}
+    public Appointment(){}
 
-    public Appointments(int id, int client_id, int lawyer_id, Enum<AppointmentStatus> status, LocalDateTime appointment_time) {
+    public Appointment(int id, int client_id, int lawyer_id, AppointmentStatus status, LocalDateTime appointment_time) {
         this.id = id;
         this.client_id = client_id;
         this.lawyer_id = lawyer_id;
@@ -43,11 +43,11 @@ public class Appointments {
         this.lawyer_id = lawyer_id;
     }
 
-    public Enum<AppointmentStatus> getStatus() {
+    public AppointmentStatus getStatus() {
         return status;
     }
 
-    public void setStatus(Enum<AppointmentStatus> status) {
+    public void setStatus(AppointmentStatus status) {
         this.status = status;
     }
 

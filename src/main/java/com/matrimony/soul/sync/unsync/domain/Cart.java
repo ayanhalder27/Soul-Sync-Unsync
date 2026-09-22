@@ -4,11 +4,11 @@ public class Cart {
     private int id;
     private int client_id;
     private int service_id;
-    private Enum<CartStatus> status;
+    private CartStatus status;
 
     public Cart(){}
 
-    public Cart(int id, int client_id, int service_id, Enum<CartStatus> status) {
+    public Cart(int id, int client_id, int service_id, CartStatus status) {
         this.id = id;
         this.client_id = client_id;
         this.service_id = service_id;
@@ -39,11 +39,11 @@ public class Cart {
         this.service_id = service_id;
     }
 
-    public Enum<CartStatus> getStatus() {
+    public CartStatus getStatus() {
         return status;
     }
 
-    public void setStatus(Enum<CartStatus> status) {
+    public void setStatus(CartStatus status) {
         this.status = status;
     }
 
