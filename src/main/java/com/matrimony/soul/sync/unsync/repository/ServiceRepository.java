@@ -18,9 +18,8 @@ public class ServiceRepository {
     }
 
     public int insert(Service service){
-        return jdbcTemplate.update("INSERT INTO Services(service_name,description,price,organizer_id) VALUES(?,?,?,?);",
-                service.getService_name(),
-                service
+        return jdbcTemplate.update("INSERT INTO Services(service_name,description,price,organizer_id) VALUES(?, ?, ?,  ?);");
+
 
     }
 }
