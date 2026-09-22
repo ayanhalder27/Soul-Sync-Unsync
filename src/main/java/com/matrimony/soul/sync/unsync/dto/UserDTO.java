@@ -1,34 +1,33 @@
-package com.matrimony.soul.sync.unsync.domain;
+package com.matrimony.soul.sync.unsync.dto;
 
-public class User {
+import com.matrimony.soul.sync.unsync.domain.Gender;
+import com.matrimony.soul.sync.unsync.domain.Religion;
+import com.matrimony.soul.sync.unsync.domain.SoulStatus;
+
+public class UserDTO {
     private int id;
     private String name;
     private String username;
     private String email;
     private String contact;
     private Gender gender;
-    private String password_hash;
-    private Role role;
     private Religion religion;
-    private SoulStatus soulStatus;
+    private SoulStatus soul_status;
     private String profile_pic;
-    private boolean visibility;
+    private int partners;
 
-    public User(){}
-
-    public User(int id, String name, String username, String email, String contact, Gender gender, String password_hash, Role role, Religion religion, SoulStatus soulStatus, String profile_pic, boolean visibility) {
+    public UserDTO(){}
+    public UserDTO(int id, String name, String username, String email, String contact, Gender gender, Religion religion, SoulStatus soul_status, String profile_pic, int partners) {
         this.id = id;
         this.name = name;
         this.username = username;
         this.email = email;
         this.contact = contact;
         this.gender = gender;
-        this.password_hash = password_hash;
-        this.role = role;
         this.religion = religion;
-        this.soulStatus = soulStatus;
+        this.soul_status = soul_status;
         this.profile_pic = profile_pic;
-        this.visibility = visibility;
+        this.partners = partners;
     }
 
     public int getId() {
@@ -79,22 +78,6 @@ public class User {
         this.gender = gender;
     }
 
-    public String getPassword_hash() {
-        return password_hash;
-    }
-
-    public void setPassword_hash(String password_hash) {
-        this.password_hash = password_hash;
-    }
-
-    public Role getRole() {
-        return role;
-    }
-
-    public void setRole(Role role) {
-        this.role = role;
-    }
-
     public Religion getReligion() {
         return religion;
     }
@@ -103,12 +86,12 @@ public class User {
         this.religion = religion;
     }
 
-    public SoulStatus getSoulStatus() {
-        return soulStatus;
+    public SoulStatus getSoul_status() {
+        return soul_status;
     }
 
-    public void setSoulStatus(SoulStatus soulStatus) {
-        this.soulStatus = soulStatus;
+    public void setSoul_status(SoulStatus soul_status) {
+        this.soul_status = soul_status;
     }
 
     public String getProfile_pic() {
@@ -119,29 +102,27 @@ public class User {
         this.profile_pic = profile_pic;
     }
 
-    public boolean getVisibility() {
-        return visibility;
+    public int getPartners() {
+        return partners;
     }
 
-    public void setVisibility(boolean visibility) {
-        this.visibility = visibility;
+    public void setPartners(int partners) {
+        this.partners = partners;
     }
 
     @Override
     public String toString() {
-        return "User{" +
+        return "UserDTO{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", username='" + username + '\'' +
                 ", email='" + email + '\'' +
                 ", contact='" + contact + '\'' +
                 ", gender=" + gender +
-                ", password_hash='" + password_hash + '\'' +
-                ", role=" + role +
                 ", religion=" + religion +
-                ", soulStatus=" + soulStatus +
+                ", soul_status=" + soul_status +
                 ", profile_pic='" + profile_pic + '\'' +
-                ", visibility=" + visibility +
+                ", partners=" + partners +
                 '}';
     }
 }

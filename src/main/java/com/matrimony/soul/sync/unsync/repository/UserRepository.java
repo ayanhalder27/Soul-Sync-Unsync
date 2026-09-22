@@ -1,9 +1,15 @@
 package com.matrimony.soul.sync.unsync.repository;
 
+import com.matrimony.soul.sync.unsync.domain.Gender;
+import com.matrimony.soul.sync.unsync.domain.Religion;
 import com.matrimony.soul.sync.unsync.domain.User;
+import com.matrimony.soul.sync.unsync.dto.UserDTO;
+import com.matrimony.soul.sync.unsync.repository.mapper.UserDTOMapper;
 import com.matrimony.soul.sync.unsync.repository.mapper.UserMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 @Repository
 public class UserRepository {
@@ -49,5 +55,12 @@ public class UserRepository {
 
     public int delete(int id){
         return jdbcTemplate.update("DELETE FROM Users WHERE id = ?;",id);
+    }
+
+    public List<UserDTO> Suggestions(Gender myGender, Religion religion){
+        return jdbcTemplate.query("SELECT id, name, username, email, contact, gender, religion, soul_status, profile_pic, (SELECT count(*) FROM Partners where user1_id = Users.id OR user2_id = Users.id) AS partners FROM Users WHERE role = 'CLIENT' AND visibility = 1 AND gender != ? AND  religion = ?;",
+                new UserDTOMapper(),
+                myGender.toString(),
+                religion.toString());
     }
 }

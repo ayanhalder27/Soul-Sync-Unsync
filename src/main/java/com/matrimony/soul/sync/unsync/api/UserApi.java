@@ -1,10 +1,13 @@
 package com.matrimony.soul.sync.unsync.api;
 
 import com.matrimony.soul.sync.unsync.domain.User;
+import com.matrimony.soul.sync.unsync.dto.UserDTO;
 import com.matrimony.soul.sync.unsync.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("api/user")
@@ -36,5 +39,10 @@ public class UserApi {
     public ResponseEntity<Integer> delete(@PathVariable int id){
         userService.delete(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @GetMapping
+    public ResponseEntity<List<UserDTO>> Suggestions(@RequestParam int myId){
+        return ResponseEntity.ok(userService.Suggestions(myId));
     }
 }
