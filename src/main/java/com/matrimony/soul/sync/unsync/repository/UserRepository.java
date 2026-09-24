@@ -6,6 +6,7 @@ import com.matrimony.soul.sync.unsync.domain.User;
 import com.matrimony.soul.sync.unsync.dto.UserDTO;
 import com.matrimony.soul.sync.unsync.repository.mapper.UserDTOMapper;
 import com.matrimony.soul.sync.unsync.repository.mapper.UserMapper;
+import org.springframework.boot.webmvc.autoconfigure.WebMvcProperties;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -64,6 +65,11 @@ public class UserRepository {
                 religion.toString());
     }
 
-
-
+    public User getUserByUsername(String username){
+        return jdbcTemplate.queryForObject("SELECT * FROM Users WHERE username = ? OR email = ? OR contact = ?",
+                new UserMapper(),
+                username,
+                username,
+                username);
+    }
 }

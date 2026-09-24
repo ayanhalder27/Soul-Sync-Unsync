@@ -1,17 +1,52 @@
 package com.matrimony.soul.sync.unsync.domain;
 
+import jakarta.validation.constraints.*;
+
 public class User {
     private int id;
+
+    @NotBlank(message = "Name is required")
+    @Size(min = 2, max = 100, message = "Name must be between 2 and 100 characters")
     private String name;
+
+    @NotBlank(message = "Username is required")
+    @Size(min = 3, max = 50, message = "Username must be between 3 and 50 characters")
+    @Pattern(
+            regexp = "^[a-zA-Z0-9_]+$",
+            message = "Username can only contain letters, numbers and underscores"
+    )
     private String username;
+
+    @NotBlank(message = "Email is required")
+    @Email(message = "Invalid email format")
+    @Size(max = 150, message = "Email cannot exceed 150 characters")
     private String email;
+
+    @NotBlank(message = "Contact number is required")
+    @Pattern(
+            regexp = "^(?:\\+8801|01)[3-9]\\d{8}$",
+            message = "Invalid Bangladesh contact number"
+    )
     private String contact;
+
+    @NotNull(message = "Gender is required")
     private Gender gender;
+
+    @NotBlank(message = "Password is required")
+    @Size(min = 8, max = 255, message = "Password must be between 8 and 255 characters")
     private String password_hash;
+
+    @NotNull(message = "Role is required")
     private Role role;
+
+    @NotNull(message = "Religion is required")
     private Religion religion;
+
     private SoulStatus soulStatus;
+
+    @Size(max = 500, message = "Profile picture URL cannot exceed 500 characters")
     private String profile_pic;
+
     private boolean visibility;
 
     public User(){}

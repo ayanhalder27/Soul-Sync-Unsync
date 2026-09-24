@@ -1,16 +1,23 @@
 package com.matrimony.soul.sync.unsync.domain;
 
+import jakarta.validation.constraints.Positive;
+
 import java.time.LocalDateTime;
 
 public class Request {
     private int id;
-    private int sender_id;
-    private int receiver_id;
+
+    @Positive(message = "Sender ID must be positive")
+    private Integer sender_id;
+
+    @Positive(message = "Receiver ID must be positive")
+    private Integer receiver_id;
+
     private LocalDateTime sent_at;
 
     public Request(){}
 
-    public Request(int id, int sender_id, int receiver_id, LocalDateTime sent_at) {
+    public Request(int id, Integer sender_id, Integer receiver_id, LocalDateTime sent_at) {
         this.id = id;
         this.sender_id = sender_id;
         this.receiver_id = receiver_id;
@@ -25,7 +32,7 @@ public class Request {
         this.id = id;
     }
 
-    public int getSender_id() {
+    public Integer getSender_id() {
         return sender_id;
     }
 
@@ -33,7 +40,7 @@ public class Request {
         this.sender_id = sender_id;
     }
 
-    public int getReceiver_id() {
+    public Integer getReceiver_id() {
         return receiver_id;
     }
 

@@ -1,17 +1,29 @@
 package com.matrimony.soul.sync.unsync.domain;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Positive;
+import jakarta.validation.constraints.Size;
+
 import java.time.LocalDateTime;
 
 public class Chat {
     private int id;
-    private int sender_id;
-    private int receiver_id;
+
+    @Positive(message = "Sender ID must be positive")
+    private Integer sender_id;
+
+    @Positive(message = "Receiver ID must be positive")
+    private Integer receiver_id;
+
+    @NotBlank(message = "Message cannot be empty")
+    @Size(max = 65535, message = "Message is too long")
     private String message;
+
     private LocalDateTime sent_at;
 
     public Chat(){}
 
-    public Chat(int id, int sender_id, int receiver_id, String message, LocalDateTime sent_at) {
+    public Chat(int id, Integer sender_id, Integer receiver_id, String message, LocalDateTime sent_at) {
         this.id = id;
         this.sender_id = sender_id;
         this.receiver_id = receiver_id;
@@ -27,7 +39,7 @@ public class Chat {
         this.id = id;
     }
 
-    public int getSender_id() {
+    public Integer getSender_id() {
         return sender_id;
     }
 
@@ -35,7 +47,7 @@ public class Chat {
         this.sender_id = sender_id;
     }
 
-    public int getReceiver_id() {
+    public Integer getReceiver_id() {
         return receiver_id;
     }
 
