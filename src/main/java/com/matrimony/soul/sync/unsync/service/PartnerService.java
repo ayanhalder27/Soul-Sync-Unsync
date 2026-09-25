@@ -8,6 +8,7 @@ import com.matrimony.soul.sync.unsync.repository.PartnerRepository;
 import com.matrimony.soul.sync.unsync.repository.RequestRepository;
 import com.matrimony.soul.sync.unsync.repository.UserRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 public class PartnerService {
@@ -19,6 +20,7 @@ public class PartnerService {
         this.userRepository = userRepository;
     }
 
+    @Transactional
     public boolean addPartner(Partner partner){
         User myself = userRepository.get(partner.getUser1_id());
         User myPartner = userRepository.get(partner.getUser2_id());
