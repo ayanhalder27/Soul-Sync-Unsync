@@ -3,6 +3,7 @@ package com.matrimony.soul.sync.unsync.api;
 import com.matrimony.soul.sync.unsync.domain.Appointment;
 import com.matrimony.soul.sync.unsync.domain.User;
 import com.matrimony.soul.sync.unsync.service.AppointmentService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +26,7 @@ public class AppointmentApi {
     }
 
     @PostMapping("/appointment")
-    public ResponseEntity<String> createAppointment(@RequestBody Appointment appointment) {
+    public ResponseEntity<String> createAppointment(@Valid @RequestBody Appointment appointment) {
         boolean created = appointmentService.createAppointment(appointment);
         if (created) {
             return ResponseEntity.ok("Appointment booked successfully.");

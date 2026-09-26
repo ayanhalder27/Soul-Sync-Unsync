@@ -1,12 +1,21 @@
 package com.matrimony.soul.sync.unsync.domain;
 
+import jakarta.validation.constraints.Future;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Positive;
+
 import java.time.LocalDateTime;
 
 public class Appointment {
     private int id;
+    @Positive(message = "Client ID must be a valid positive number")
     private int client_id;
+    @Positive(message = "Lawyer ID must be a valid positive number")
     private int lawyer_id;
+    @NotNull(message = "Appointment status cannot be null")
     private AppointmentStatus status;
+    @NotNull(message = "Appointment time cannot be null")
+    @Future(message = "Appointment time must be in the future")
     private LocalDateTime appointment_time;
 
     public Appointment(){}
