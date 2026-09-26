@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/client/user")
+@RequestMapping("api")
 public class UserApi {
     UserService userService;
 
@@ -18,7 +18,7 @@ public class UserApi {
         this.userService = userService;
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/user/{id}")
     public ResponseEntity<User> get(@PathVariable int id){
         return ResponseEntity.ok(userService.get(id));
     }
@@ -29,19 +29,19 @@ public class UserApi {
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("user/{id}")
     public ResponseEntity<Integer> update(@RequestBody User user, @PathVariable int id){
         userService.update(user, id);
         return ResponseEntity.status(HttpStatus.PARTIAL_CONTENT).build();
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("client/user/{id}")
     public ResponseEntity<Integer> delete(@PathVariable int id){
         userService.delete(id);
         return ResponseEntity.noContent().build();
     }
 
-    @GetMapping
+    @GetMapping("client/user")
     public ResponseEntity<List<UserDTO>> Suggestions(@RequestParam int myId){
         return ResponseEntity.ok(userService.Suggestions(myId));
     }
