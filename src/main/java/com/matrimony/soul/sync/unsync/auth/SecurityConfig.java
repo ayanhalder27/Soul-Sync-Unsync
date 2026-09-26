@@ -1,5 +1,6 @@
 package com.matrimony.soul.sync.unsync.auth;
 
+import com.matrimony.soul.sync.unsync.aspect.LoggingAspect;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationProvider;
@@ -18,6 +19,12 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
+    private final LoggingAspect loggingAspect;
+
+    public SecurityConfig(LoggingAspect loggingAspect) {
+        this.loggingAspect = loggingAspect;
+    }
+
     @Bean
     public AuthenticationProvider authenticationProvider(UserDetailsService userDetailsService){
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider(userDetailsService);
@@ -35,10 +42,18 @@ public class SecurityConfig {
                         registry.requestMatchers("/api/client/**").hasRole("CLIENT")
                                 .requestMatchers("/api/organizer/**").hasRole("ORGANIZER")
                                 .requestMatchers("/api/lawyer/**").hasRole("LAWYER")
-                                .requestMatchers("/api/**").permitAll()
+                                .requestMatchers("/api/**").authenticated()
                                 .anyRequest().authenticated())
                 .httpBasic(Customizer.withDefaults())
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
+                .exceptionHandling(exception ->
+                        exception
+                                .authenticationEntryPoint(loggingAspect)
+                )
+                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .logout(logout-> logout
+                        .addLogoutHandler(loggingAspect)
+                        .permitAll()
+                );
 
         return httpSecurity.build();
     }
